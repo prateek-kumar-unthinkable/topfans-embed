@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/my-angular-app/browser",
+    "public": "dist/topfans-embed/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

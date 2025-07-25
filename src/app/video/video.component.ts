@@ -15,23 +15,23 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoUrl = this.route.snapshot.queryParamMap.get('videoUrl');
-    console.log('[VideoComponent] ngOnInit called');
+    // console.log('[VideoComponent] ngOnInit called');
     if (this.videoUrl) {
-      console.log('[VideoComponent] videoUrl found:', this.videoUrl);
+      // console.log('[VideoComponent] videoUrl found:', this.videoUrl);
       setTimeout(async () => {
         const video = document.getElementById('videoPlayer') as HTMLVideoElement;
         if (video) {
-          console.log('[VideoComponent] video element found');
+          // console.log('[VideoComponent] video element found');
           if (this.videoUrl!.endsWith('.m3u8')) {
-            console.log('[VideoComponent] Detected .m3u8 file');
+            // console.log('[VideoComponent] Detected .m3u8 file');
             if (video.canPlayType('application/vnd.apple.mpegurl')) {
-              console.log('[VideoComponent] Browser supports HLS natively');
+              // console.log('[VideoComponent] Browser supports HLS natively');
               video.src = this.videoUrl!;
             } else {
-              console.log('[VideoComponent] Browser does NOT support HLS natively, trying hls.js');
+              // console.log('[VideoComponent] Browser does NOT support HLS natively, trying hls.js');
               const Hls = (await import('hls.js')).default;
               if (Hls.isSupported()) {
-                console.log('[VideoComponent] hls.js is supported, initializing');
+                // console.log('[VideoComponent] hls.js is supported, initializing');
                 const hls = new Hls();
                 hls.loadSource(this.videoUrl!);
                 hls.attachMedia(video);
@@ -44,7 +44,7 @@ export class VideoComponent implements OnInit {
             this.videoUrl!.endsWith('.webm') ||
             this.videoUrl!.endsWith('.ogg')
           ) {
-            console.log('[VideoComponent] Detected normal video file:', this.videoUrl);
+            // console.log('[VideoComponent] Detected normal video file:', this.videoUrl);
             video.src = this.videoUrl!;
           } else {
             console.error('[VideoComponent] Unsupported video format:', this.videoUrl);
@@ -54,7 +54,7 @@ export class VideoComponent implements OnInit {
         }
       });
     } else {
-      console.warn('[VideoComponent] No videoUrl provided in query params');
+      // console.warn('[VideoComponent] No videoUrl provided in query params');
       this.videoUrl = null;
     }
   }
